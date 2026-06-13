@@ -622,3 +622,39 @@ header h2 {
   0%,70%,90% { top: 50%; padding: 0px; display: inline-block; border-radius: 100%; background: #673C63; border-width: 0 0 0 0; border: 0px solid #673C63; transform: translate(-80%, 0%); }
   71%,89% { top: 30%; background: none; border: solid #673C63; border-radius: 0px; border-width: 0 2px 2px 0; display: inline-block; padding: 1px; float: left; transform-origin: bottom left; transform: rotate(135deg) translate(-80%, 20%); -webkit-transform: rotate(135deg) translate(-80%, 20%); }
 }
+
+/* --- CANDLE BACKGROUND FIX --- */
+.wrapper {
+  position: fixed; /* Fixes it to the background */
+  top: 60%;        /* Move it down slightly */
+  left: 50%;
+  transform: scale(0.7, 0.7) translate(-50%, -50%); /* Scaled down */
+  z-index: -1;     /* Ensures it stays behind everything */
+  pointer-events: none; /* Allows clicks to pass through to your dashboard */
+}
+
+.floor {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 350px;
+  height: 5px;
+  background: #673C63;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 2px 5px #111;
+  z-index: 2;
+}
+
+.candles {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 250px;
+  height: 150px;
+  transform: translate(-50%, -100%);
+  z-index: 1;
+}
+
+/* Add the rest of your candle classes here (candle1, candle2, animations, etc.) */
+/* NOTE: Keep these exact same class names as the previous code you had, */
+/* just do not include the body { animation: ... } part! */
