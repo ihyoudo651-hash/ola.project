@@ -1,15 +1,13 @@
 /* =========================================
-   MODERN RESET & CSS VARIABLES
+   MODERN RESET & THEME SETUP
    ========================================= */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-  /* Dark Glassmorphism Theme */
-  --card-bg: rgba(15, 23, 42, 0.65);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --accent: #38bdf8;
@@ -23,165 +21,333 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  
-  /* Syncs with the 3s candle animation cycle */
+  padding: 4rem 2rem;
   background-color: #000033;
   animation: bg-sync 3s infinite linear;
+  overflow-x: hidden;
 }
 
 @keyframes bg-sync {
-  0%, 65% { background-color: #000033; } /* Navy Blue when calm */
-  75%, 95% { background-color: #000000; } /* Black when the candle gets mad */
+  0%, 65% { background-color: #000033; }
+  75%, 95% { background-color: #000000; }
   100% { background-color: #000033; }
 }
 
 .dashboard {
   width: 100%;
-  max-width: 1000px;
-  z-index: 10; /* Keeps text above the animation */
+  max-width: 1100px;
+  z-index: 10;
 }
 
 header {
-  margin-bottom: 2.5rem;
-  text-align: left;
+  margin-bottom: 3rem;
+  padding-left: 10px;
 }
 header h1 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   color: var(--text-muted);
   margin-bottom: 0.5rem;
 }
 header h2 {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-main);
 }
 
+/* --- Dashboard Display Grid --- */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3.5rem 2.5rem;
+  padding: 20px 0;
 }
 
 /* =========================================
-   CARD & DASHBOARD STYLES
+   ADVANCED SKEW NEON CARD ARCHITECTURE
    ========================================= */
-@keyframes softGlow {
-  0% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
-  50% { box-shadow: 0 8px 32px 0 rgba(56, 189, 248, 0.15); }
-  100% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+.card {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  text-decoration: none;
+  background: transparent;
 }
 
-.card {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  padding: 1.5rem;
+/* Glass Inner Content Frame */
+.card .content {
+  position: relative;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 2;
+  transition: 0.5s;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  animation: softGlow 6s ease-in-out infinite;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.5);
-  animation-play-state: paused;
-  z-index: 10;
+.card:hover .content {
+  left: -15px;
+  padding: 45px 30px;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--text-muted);
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-main);
+  font-weight: 600;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.5rem;
 }
 
+/* --- Background Neon Plates & Blurs --- */
+.card::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
+  transform: skewX(15deg);
+  transition: 0.5s;
+  z-index: 1;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
+  transform: skewX(15deg);
+  transition: 0.5s;
+  filter: blur(30px);
+  z-index: 1;
+}
+
+.card:hover::before,
+.card:hover::after {
+  transform: skewX(0deg);
+  left: 15px;
+  width: calc(100% - 45px);
+}
+
+/* --- 7 Unique High-Vibrancy Neon Custom Gradient Profiles --- */
+.weather-card::before, .weather-card::after { background: linear-gradient(315deg, #ffbc00, #ff0058); }
+.reading-card::before, .reading-card::after { background: linear-gradient(315deg, #03a9f4, #ff0058); }
+.links-card::before, .links-card::after { background: linear-gradient(315deg, #4dff03, #00d0ff); }
+.spotify-card::before, .spotify-card::after { background: linear-gradient(315deg, #b5179e, #7209b7); }
+.photos-card::before, .photos-card::after { background: linear-gradient(315deg, #ff007f, #00f0ff); }
+.diary-card::before, .diary-card::after { background: linear-gradient(315deg, #ffb703, #fb8500); }
+.candle-card::before, .candle-card::after { background: linear-gradient(315deg, #4361ee, #4cc9f0); }
+
+/* =========================================
+   FLOATING OVERLAY GLASS GEOMETRIES
+   ========================================= */
+.card span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.card span::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: 0.4s;  
+  animation: floating-glass 2.5s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover span::before {
+  top: -40px;
+  left: 30px;
+  width: 80px;
+  height: 80px;
+  opacity: 1;
+}
+
+.card span::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: 0.4s;
+  animation: floating-glass 2.5s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  animation-delay: -1.25s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover span::after {
+  bottom: -40px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  opacity: 1;
+}
+
+@keyframes floating-glass {
+  0%, 100% { transform: translateY(8px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+/* =========================================
+   CARD INNER COMPONENTS REFINEMENTS
+   ========================================= */
 .text-muted { color: var(--text-muted); }
 
-/* Inner Card Elements Clean Up */
-.reading-list {
-  list-style: none;
+/* Weather Info UI */
+.weather-info {
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
 }
-.reading-list li {
-  margin-bottom: 0.6rem;
-  font-size: 0.95rem;
+.weather-status {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+}
+.weather-temp {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
 }
 
+/* Lists and Functional Links */
+.reading-list { list-style: none; }
+.reading-list li {
+  padding: 0.6rem 0;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.links-list {
+  margin-top: auto;
+  margin-bottom: auto;
+}
 .link-btn {
-  display: inline-block;
-  padding: 0.6rem 1rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.8rem;
   background: rgba(255, 255, 255, 0.05);
-  color: var(--accent);
+  color: #fff;
   text-decoration: none;
-  border-radius: 8px;
-  margin: 0 0.5rem 0.5rem 0;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  font-weight: 600;
+  transition: 0.3s;
 }
 .link-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--accent-hover);
+  background: #fff;
+  color: #111;
+  box-shadow: 0 5px 15px rgba(255,255,255,0.2);
 }
 
-.photos-card {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
+/* Photos Grid Widget */
+.photos-card { cursor: pointer; }
+.photos-gallery {
+  width: 100%;
+  height: 180px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1rem;
 }
 .photos-gallery img {
   width: 100%;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
+  height: 100%;
+  object-fit: cover;
 }
 .photos-click-hint {
   font-size: 0.85rem;
   color: var(--accent);
   text-align: right;
   font-weight: 600;
+  margin-top: auto;
 }
 
+/* Interactive Live Diary Frame */
 #live-diary {
   width: 100%;
   flex-grow: 1;
-  min-height: 120px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-main);
-  border-radius: 8px;
-  padding: 12px;
+  color: #fff;
+  border-radius: 6px;
+  padding: 15px;
   resize: none;
   font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 #live-diary:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Embed Media Adaptations */
+.spotify-card iframe {
+  margin-top: auto;
+  border: none;
 }
 
 /* =========================================
-   ANIMATED CANDLE WIDGET
+   ANIMATED CANDLE CHARACTER ENGINE
    ========================================= */
-.candle-card {
-  min-height: 250px;
-  position: relative;
-  overflow: hidden; /* Keeps the floor and light aura contained inside the glass */
-  display: flex;
-  flex-direction: column;
+.candle-card .content {
+  overflow: hidden;
 }
 
 .wrapper {
   position: absolute;
-  top: 65%; /* Pushes the candles down nicely into the card */
+  top: 65%;
   left: 50%;
   width: 0;
   height: 0;
-  transform: scale(0.5); /* Shrinks the animation to fit the card perfectly */
+  transform: scale(0.52);
   z-index: 1;
   pointer-events: none;
   opacity: 0.95;
@@ -191,20 +357,8 @@ header h2 {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 175px;
+  width: 110px; /* Neatly shortened line */
   height: 5px;
-  background: #673C63;
-  transform: translate(-50%, 150%);
-  box-shadow: 0px 2px 5px #111;
-  z-index: 2;
-}
-
-.floor2 {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100px;
-  height: 8px;
   background: #673C63;
   transform: translate(-50%, 150%);
   box-shadow: 0px 2px 5px #111;
@@ -263,29 +417,17 @@ header h2 {
   transform: translate(-50%, 0%);
 }
 
-.candle1__eyes-one {
+.candle1__eyes-one, .candle1__eyes-two {
   position: absolute;
-  left: 30%;
   top: 20%;
   width: 5px;
   height: 5px;
   border-radius: 100%;
   background: #673C63;
-  transform: translate(-70%, 0%);
   animation: blink-eyes 3s infinite linear;
 }
-
-.candle1__eyes-two {
-  position: absolute;
-  left: 70%;
-  top: 20%;
-  width: 5px;
-  height: 5px;
-  border-radius: 100%;
-  background: #673C63;
-  transform: translate(-70%, 0%);
-  animation: blink-eyes 3s infinite linear;
-}
+.candle1__eyes-one { left: 30%; transform: translate(-70%, 0%); }
+.candle1__eyes-two { left: 70%; transform: translate(-70%, 0%); }
 
 .candle1__mouth {
   position: absolute;
@@ -338,35 +480,15 @@ header h2 {
   animation: shake-left 3s infinite linear;
 }
 
-.candle2__eyes-one {
+.candle2__eyes-one, .candle2__eyes-two {
   position: absolute;
-  left: 30%;
   top: 50%;
   width: 5px;
   height: 5px;
-  display: inline-block;
-  border: 0px solid #673C63;
-  border-radius: 100%;
-  float: left;
   background: #673C63;
-  transform: translate(-80%, 0%);
-  animation: changeto-lower 3s infinite linear;
 }
-
-.candle2__eyes-two {
-  position: absolute;
-  left: 70%;
-  top: 50%;
-  width: 5px;
-  height: 5px;
-  display: inline-block;
-  border: 0px solid #673C63;
-  border-radius: 100%;
-  float: left;
-  background: #673C63;
-  transform: translate(-80%, 0%);
-  animation: changeto-greater 3s infinite linear;
-}
+.candle2__eyes-one { left: 30%; transform: translate(-80%, 0%); animation: changeto-lower 3s infinite linear; }
+.candle2__eyes-two { left: 70%; transform: translate(-80%, 0%); animation: changeto-greater 3s infinite linear; }
 
 .light__wave {
   position: absolute;
@@ -395,7 +517,7 @@ header h2 {
   animation: dance-fire 3s infinite linear;
 }
 
-/* Character Animations */
+/* --- Keyframe Dynamic Triggers --- */
 @keyframes blink-eyes {
   0%,35% { opacity: 1; transform: translate(-70%, 0%); }
   36%,39% { opacity: 0; transform: translate(-70%, 0%); }
@@ -440,19 +562,8 @@ header h2 {
   62% { left: 18%; transform: translate(60%, -15%); }
   65% { left: 21%; transform: translate(60%, -15%); }
   67% { left: 20%; transform: translate(60%, -15%); }
-  75% { 
-    left: 20%; 
-    transform: scale(1.15, 0.85) translate(60%, -15%);
-    background: #B4D4E9;
-    border-color: #673C63; 
-  }
-  91% { 
-    left: 20%; 
-    transform: scale(1.18, 0.82) translate(60%, -10%);
-    background: #F44336;
-    border-color: #F44336;
-    box-shadow: -2px 0px 0px #F44336 inset;
-  }
+  75% { left: 20%; transform: scale(1.15, 0.85) translate(60%, -15%); background: #B4D4E9; border-color: #673C63; }
+  91% { left: 20%; transform: scale(1.18, 0.82) translate(60%, -10%); background: #F44336; border-color: #F44336; box-shadow: -2px 0px 0px #F44336 inset; }
   92% { left: 20%; transform: scale(0.85, 1.15) translate(60%, -15%); }
   95% { left: 20%; transform: scale(1.05, 0.95) translate(60%, -15%); }
   97% { left: 20%; transform: scale(1, 1) translate(60%, -15%); }
@@ -460,7 +571,6 @@ header h2 {
 
 @keyframes stick-animation {
   0%,40% { left: 50%; top: 0%; transform: translate(-50%, -100%); }
-  50%,54% { left: 50%; top: 0%; transform: translate(-50%, -100%); }
   59% { left: 50%; top: 0%; transform: translate(-50%, -100%); }
   62% { left: 50%; top: 0%; transform: rotateZ(-15deg) translate(-50%, -100%); }
   65% { left: 50%; top: 0%; transform: rotateZ(15deg) translate(-50%, -100%); }
@@ -485,11 +595,11 @@ header h2 {
 }
 
 @keyframes changeto-lower {
-  0%,70%,90% { padding: 0px; display: inline-block; border-radius: 100%; background: #673C63; border-width: 0 0 0 0; border: 0px solid #673C63; transform: translate(-90%, 0%); }
-  71%,89% { background: none; border: solid #673C63; border-radius: 0px; border-width: 0 2px 2px 0; display: inline-block; padding: 1px; float: left; transform-origin: bottom left; transform: rotate(-45deg) translate(-50%, -65%); -webkit-transform: rotate(-45deg) translate(-50%, -65%); }
+  0%,70%,90% { border-radius: 100%; background: #673C63; transform: translate(-90%, 0%); border: 0px; padding: 0; }
+  71%,89% { background: none; border: solid #673C63; border-width: 0 2px 2px 0; display: inline-block; padding: 1px; transform: rotate(-45deg) translate(-50%, -65%); }
 }
 
 @keyframes changeto-greater {
-  0%,70%,90% { top: 50%; padding: 0px; display: inline-block; border-radius: 100%; background: #673C63; border-width: 0 0 0 0; border: 0px solid #673C63; transform: translate(-80%, 0%); }
-  71%,89% { top: 30%; background: none; border: solid #673C63; border-radius: 0px; border-width: 0 2px 2px 0; display: inline-block; padding: 1px; float: left; transform-origin: bottom left; transform: rotate(135deg) translate(-80%, 20%); -webkit-transform: rotate(135deg) translate(-80%, 20%); }
+  0%,70%,90% { top: 50%; border-radius: 100%; background: #673C63; transform: translate(-80%, 0%); border: 0px; padding: 0; }
+  71%,89% { top: 30%; background: none; border: solid #673C63; border-width: 0 2px 2px 0; display: inline-block; padding: 1px; transform: rotate(135deg) translate(-80%, 20%); }
 }
