@@ -15,80 +15,99 @@
     </header>
 
     <main class="grid">
-      <section class="card">
-        <h3>Weather - Manchester</h3>
-        <div class="weather-info">
-          <div id="weather-desc" class="weather-status">Loading weather...</div>
-          <div id="weather-temp" class="weather-temp">--°C</div>
-        </div>
-      </section>
-
-      <section class="card">
-        <h3>Reading List</h3>
-        <ul class="reading-list">
-          <li>📚 One piece - <span class="text-muted">Chapter 1184</span></li>
-          <li>📚 Wistoria - <span class="text-muted">Chapter 65</span></li>
-          <li>📚 Eleceed - <span class="text-muted">Chapter 405</span></li>
-          <li>📚 Blue lock - <span class="text-muted">Chapter 394</span></li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h3>Daily Links</h3>
-        <div class="links-list">
-          <a href="https://www.bromcomvle.com" target="_blank" class="link-btn">Bromcom</a>
-          <a href="https://ernax.pro/" target="_blank" class="link-btn">Ernax</a>
-          <a href="https://www.roblox.com" target="_blank" class="link-btn">Roblox</a>
-        </div>
-      </section>
-
-      <section class="card spotify-card">
-        <h3>Now Playing</h3>
-        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1EJzc5RRrAKvc6?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </section>
-
-      <section class="card candle-card">
-        <h3>Vibe Check</h3>
-        <div class="wrapper">
-          <div class="floor"></div>
-          <div class="candles">
-            <div class="candle1">
-              <div class="candle1__eyes">
-                <span class="candle1__eyes-one"></span>
-                <span class="candle1__eyes-two"></span>
-              </div>
-              <div class="candle1__mouth"></div>
-              <div class="candle1__stick"></div>
-            </div>
-            
-            <div class="candle2">
-              <div class="candle2__eyes">
-                <span class="candle2__eyes-one"></span>
-                <span class="candle2__eyes-two"></span>
-              </div>
-              <div class="candle2__stick"></div>
-            </div>
-            
-            <div class="candle2__fire"></div>
-            <div class="light__wave"></div>
-            <div class="candle__smoke-one"></div>
-            <div class="candle__smoke-two"></div>
+      
+      <section class="card weather-card">
+        <span></span>
+        <div class="content">
+          <h3>Weather - Manchester</h3>
+          <div class="weather-info">
+            <div id="weather-desc" class="weather-status">Loading weather...</div>
+            <div id="weather-temp" class="weather-temp">--°C</div>
           </div>
         </div>
       </section>
 
-      <a href="photos.html" target="_blank" class="card photos-card">
-        <h3>Photos</h3>
-        <div class="photos-gallery">
-          <img src="mike bruss eating.jpg" alt="Gallery Preview" onerror="this.src='https://via.placeholder.com/300x200/1e293b/f8fafc?text=View+Gallery'">
+      <section class="card reading-card">
+        <span></span>
+        <div class="content">
+          <h3>Reading List</h3>
+          <ul class="reading-list">
+            <li>📚 One piece - <span class="text-muted">Chapter 1184</span></li>
+            <li>📚 Wistoria - <span class="text-muted">Chapter 65</span></li>
+            <li>📚 Eleceed - <span class="text-muted">Chapter 405</span></li>
+            <li>📚 Blue lock - <span class="text-muted">Chapter 394</span></li>
+          </ul>
         </div>
-        <span class="photos-click-hint">View Collection ↗</span>
+      </section>
+
+      <section class="card links-card">
+        <span></span>
+        <div class="content">
+          <h3>Daily Links</h3>
+          <div class="links-list">
+            <a href="https://www.bromcomvle.com" target="_blank" class="link-btn">Bromcom</a>
+            <a href="https://ernax.pro/" target="_blank" class="link-btn">Ernax</a>
+            <a href="https://www.roblox.com" target="_blank" class="link-btn">Roblox</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="card spotify-card">
+        <span></span>
+        <div class="content">
+          <h3>Now Playing</h3>
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1EJzc5RRrAKvc6?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </section>
+
+      <a href="photos.html" target="_blank" class="card photos-card">
+        <span></span>
+        <div class="content">
+          <h3>Photos</h3>
+          <div class="photos-gallery">
+            <img src="mike bruss eating.jpg" alt="Gallery Preview" onerror="this.src='https://via.placeholder.com/300x200/1e293b/f8fafc?text=View+Gallery'">
+          </div>
+          <span class="photos-click-hint">View Collection ↗</span>
+        </div>
       </a>
 
       <section class="card diary-card">
-        <h3>Live Diary</h3>
-        <textarea id="live-diary" placeholder="Type thoughts, tasks, or logs... (Changes auto-save!)"></textarea>
+        <span></span>
+        <div class="content">
+          <h3>Live Diary</h3>
+          <textarea id="live-diary" placeholder="Type thoughts, tasks, or logs... (Changes auto-save!)"></textarea>
+        </div>
       </section>
+
+      <section class="card candle-card">
+        <span></span>
+        <div class="content">
+          <h3>Vibe Check</h3>
+          <div class="wrapper">
+            <div class="floor"></div>
+            <div class="candles">
+              <div class="light__wave"></div>
+              <div class="candle1">
+                <div class="candle1__eyes">
+                  <span class="candle1__eyes-one"></span>
+                  <span class="candle1__eyes-two"></span>
+                </div>
+                <div class="candle1__mouth"></div>
+                <div class="candle1__stick"></div>
+              </div>
+              <div class="candle2">
+                <span class="candle2__eyes-one"></span>
+                <span class="candle2__eyes-two"></span>
+                <div class="candle2__stick"></div>
+              </div>
+              <div class="candle2__fire"></div>
+              <div class="candle__smoke-one"></div>
+              <div class="candle__smoke-two"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
   </div>
 
