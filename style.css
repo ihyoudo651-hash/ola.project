@@ -8,11 +8,12 @@
 }
 
 :root {
-  --card-bg: rgba(255, 255, 255, 0.45);
-  --text-main: #1e293b;
-  --text-muted: #52607a;
-  --accent: #d946ef;
-  --accent-hover: #f472b6;
+  /* Dark Glassmorphism Theme */
+  --card-bg: rgba(15, 23, 42, 0.65);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
 }
 
 body {
@@ -24,16 +25,21 @@ body {
   align-items: center;
   padding: 2rem;
   
-  /* Original Colors Preserved */
-  background-color: #A9C9FF;
-  background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
-  background-size: 100% 100%;
-  background-attachment: fixed;
+  /* Syncs with the 3s candle animation cycle */
+  background-color: #000033;
+  animation: bg-sync 3s infinite linear;
+}
+
+@keyframes bg-sync {
+  0%, 65% { background-color: #000033; } /* Navy Blue when calm */
+  75%, 95% { background-color: #000000; } /* Black when the candle gets mad */
+  100% { background-color: #000033; }
 }
 
 .dashboard {
   width: 100%;
   max-width: 1000px;
+  z-index: 10; /* Keeps text above the animation */
 }
 
 header {
@@ -60,12 +66,12 @@ header h2 {
 }
 
 /* =========================================
-   CARD STYLES
+   CARD & DASHBOARD STYLES
    ========================================= */
 @keyframes softGlow {
-  0% { box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); }
-  50% { box-shadow: 0 8px 32px 0 rgba(217, 70, 239, 0.2); }
-  100% { box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); }
+  0% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+  50% { box-shadow: 0 8px 32px 0 rgba(56, 189, 248, 0.15); }
+  100% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
 }
 
 .card {
@@ -76,15 +82,15 @@ header h2 {
   flex-direction: column;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   animation: softGlow 6s ease-in-out infinite;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card:hover {
   transform: translateY(-8px) scale(1.02);
-  border-color: rgba(255, 255, 255, 1);
-  box-shadow: 0 15px 35px 0 rgba(31, 38, 135, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.5);
   animation-play-state: paused;
   z-index: 10;
 }
@@ -93,24 +99,82 @@ header h2 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
   color: var(--text-muted);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.5rem;
 }
 
 .text-muted { color: var(--text-muted); }
+
+/* Inner Card Elements Clean Up */
+.reading-list {
+  list-style: none;
+}
+.reading-list li {
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.link-btn {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 8px;
+  margin: 0 0.5rem 0.5rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+.link-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--accent-hover);
+}
+
+.photos-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.photos-gallery img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.photos-click-hint {
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-align: right;
+  font-weight: 600;
+}
+
+#live-diary {
+  width: 100%;
+  flex-grow: 1;
+  min-height: 120px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border-radius: 8px;
+  padding: 12px;
+  resize: none;
+  font-family: inherit;
+}
+#live-diary:focus {
+  outline: none;
+  border-color: var(--accent);
+}
 
 /* =========================================
    ANIMATED CANDLE BACKGROUND
    ========================================= */
 .wrapper {
   position: fixed;
-  left: 50%;
-  top: 50%;
-  /* Fixed sizing here */
-  transform: scale(0.4) translate(-125%, -125%); 
-  z-index: -1;
+  bottom: 5%;
+  right: 15%;
+  transform: scale(0.6); 
+  z-index: 1;
   pointer-events: none;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .floor {
@@ -309,7 +373,7 @@ header h2 {
   animation: dance-fire 3s infinite linear;
 }
 
-/* Animations */
+/* Character Animations */
 @keyframes blink-eyes {
   0%,35% { opacity: 1; transform: translate(-70%, 0%); }
   36%,39% { opacity: 0; transform: translate(-70%, 0%); }
