@@ -1,4 +1,4 @@
-// 1. Dynamic Greeting based on time of day
+
 function updateGreeting() {
   const greetingElement = document.getElementById('greeting');
   const hours = new Date().getHours();
@@ -12,7 +12,7 @@ function updateGreeting() {
   }
 }
 
-// 2. Real Weather API Fetcher
+
 async function fetchWeather() {
   try {
     const city = 'Manchester';
@@ -31,7 +31,7 @@ async function fetchWeather() {
   }
 }
 
-// 3. Live Diary with LocalStorage Persistence
+
 const diaryTextArea = document.getElementById('live-diary');
 
 function initDiary() {
@@ -45,7 +45,7 @@ function initDiary() {
   });
 }
 
-// Initialize Dashboard Applications
+
 updateGreeting();
 fetchWeather();
 initDiary();
