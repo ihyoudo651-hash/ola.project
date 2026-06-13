@@ -5,23 +5,28 @@
   padding: 0;
 }
 :root {
-  --bg-color: #0f172a;
-  --card-bg: #1e293b;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent: #38bdf8;
-  --accent-hover: #7dd3fc;
+  /* Updated to a sleek light-glass theme to match your background */
+  --card-bg: rgba(255, 255, 255, 0.45); /* Semi-transparent white */
+  --text-main: #1e293b; /* Dark slate for readability */
+  --text-muted: #64748b;
+  --accent: #d946ef; /* A vibrant pink to match the gradient */
+  --accent-hover: #f472b6;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg-color);
   color: var(--text-main);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  
+  /* --- THE BACKGROUND YOU REQUESTED --- */
+  background-color: #A9C9FF;
+  background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+  background-size: 100% 100%;
+  background-attachment: fixed; /* Keeps the gradient smooth when scrolling */
 }
 
 .dashboard {
@@ -54,223 +59,26 @@ header h2 {
   gap: 1.5rem;
 }
 
-/* =========================================
-   ANIMATIONS & KEYFRAMES
-   ========================================= */
-@keyframes softGlow {
-  0% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2); }
-  50% { box-shadow: 0 4px 20px -2px rgba(56, 189, 248, 0.12); }
-  100% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2); }
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* --- Card Component (Idle & Hover) --- */
+/* --- Card Component (Frosted Glass Effect) --- */
 .card {
   background-color: var(--card-bg);
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  border: 1px solid transparent;
   
-  /* Idle Animation */
-  animation: softGlow 6s ease-in-out infinite;
+  /* The Glassmorphism Magic */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
   
-  /* Springy Hover Transition */
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Staggering the idle glow so it looks organic */
-.card:nth-child(1) { animation-delay: 0s; }
-.card:nth-child(2) { animation-delay: 2s; }
-.card:nth-child(3) { animation-delay: 4s; }
-.card:nth-child(4) { animation-delay: 1s; }
-.card:nth-child(5) { animation-delay: 3s; }
-.card:nth-child(6) { animation-delay: 5s; }
-
 .card:hover {
   transform: translateY(-8px) scale(1.02);
-  border-color: rgba(56, 189, 248, 0.3);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-  animation-play-state: paused; /* Pauses idle glow while hovering */
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 15px 35px 0 rgba(31, 38, 135, 0.15);
   z-index: 10;
-}
-
-.card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--text-muted);
-  border-bottom: 1px solid #334155;
-  padding-bottom: 0.5rem;
-  transition: color 0.3s ease;
-}
-.card:hover h3 {
-  color: var(--text-main);
-}
-
-.text-muted {
-  color: var(--text-muted);
-}
-
-/* --- Weather Widget Styles --- */
-.weather-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.weather-status {
-  font-size: 1rem;
-  color: var(--text-muted);
-}
-.weather-temp {
-  font-size: 2.5rem;
-  font-weight: bold;
-  
-  /* Animated Gradient Text */
-  background: linear-gradient(270deg, var(--accent), #818cf8, var(--accent));
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 5s ease infinite;
-}
-
-/* --- Reading List Styles --- */
-.reading-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.reading-list li {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  transition: transform 0.2s ease, color 0.2s ease;
-  cursor: default;
-}
-.reading-list li:hover {
-  transform: translateX(8px); /* Nudges text to the right */
-  color: var(--accent);
-}
-
-/* --- Daily Links Styles --- */
-.links-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.link-btn {
-  display: block;
-  background-color: #334155;
-  color: var(--text-main);
-  text-decoration: none;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s ease;
-}
-
-/* Slide-in Background Animation */
-.link-btn::before {
-  content: '';
-  position: absolute;
-  top: 0; 
-  left: -100%;
-  width: 100%; 
-  height: 100%;
-  background-color: var(--accent);
-  transition: left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  z-index: -1;
-}
-.link-btn:hover::before {
-  left: 0;
-}
-.link-btn:hover {
-  color: var(--bg-color);
-  transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
-}
-
-/* --- Spotify Layout Fix --- */
-.spotify-card iframe {
-  border: none;
-  border-radius: 12px;
-  margin-top: auto;
-  transition: opacity 0.3s ease;
-}
-.spotify-card:hover iframe {
-  opacity: 0.9; /* Slight dimming effect to focus on the border pop */
-}
-
-/* --- Photos Widget Links & Modifiers --- */
-.photos-card {
-  text-decoration: none;
-  color: inherit;
-  min-height: 250px;
-}
-.photos-gallery {
-  width: 100%;
-  height: 100%;
-  min-height: 165px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-top: auto;
-}
-.photos-gallery img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.photos-card:hover .photos-gallery img {
-  transform: scale(1.1) rotate(1deg); /* Slower, dramatic zoom */
-}
-.photos-click-hint {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 0.6rem;
-  text-align: right;
-  font-weight: 500;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-.photos-card:hover .photos-click-hint {
-  color: var(--accent);
-  transform: translateX(-4px); /* Arrows nudge left indicating interaction */
-}
-
-/* --- Live Diary Layout & Styling --- */
-.diary-card {
-  grid-column: span 1;
-}
-@media (min-width: 768px) {
-  .diary-card {
-    grid-column: span 2; 
-  }
-}
-#live-diary {
-  width: 100%;
-  min-height: 152px;
-  background-color: #0f172a;
-  color: var(--text-main);
-  border: 1px solid #334155;
-  border-radius: 8px;
-  padding: 0.75rem;
-  font-family: inherit;
-  font-size: 0.95rem;
-  resize: vertical;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-#live-diary:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); /* Creates a focus ring */
 }
