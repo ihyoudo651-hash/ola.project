@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Everyday Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="dashboard">
+    <header>
+      <h1>Our Everyday Dashboard</h1>
+      <h2 id="greeting">Good Day - Pukka Mandem</h2>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h3>Weather - Manchester</h3>
+        <div class="weather-info">
+          <div id="weather-desc" class="weather-status">Loading weather...</div>
+          <div id="weather-temp" class="weather-temp">--°C</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Reading List</h3>
+        <ul class="reading-list">
+          <li>📚 One piece - <span class="text-muted">Chapter 1184</span></li>
+          <li>📚 Wistoria - <span class="text-muted">Chapter 65</span></li>
+          <li>📚 Eleceed - <span class="text-muted">Chapter 405</span></li>
+          <li>📚 Blue lock - <span class="text-muted">Chapter 394</span></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3>Daily Links</h3>
+        <div class="links-list">
+          <a href="https://www.bromcomvle.com" target="_blank" class="link-btn">Bromcom</a>
+          <a href="https://ernax.pro/" target="_blank" class="link-btn">Ernax</a>
+          <a href="https://www.roblox.com" target="_blank" class="link-btn">Roblox</a>
+        </div>
+      </section>
+
+      <section class="card spotify-card">
+        <h3>Now Playing</h3>
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1EJzc5RRrAKvc6?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </section>
+
+      <a href="photos.html" target="_blank" class="card photos-card">
+        <h3>Photos</h3>
+        <div class="photos-gallery">
+          <img src="mike bruss eating.jpg" alt="Gallery Preview">
+        </div>
+        <span class="photos-click-hint">View Collection ↗</span>
+      </a>
+
+      <section class="card diary-card">
+        <h3>Live Diary</h3>
+        <textarea id="live-diary" placeholder="Type thoughts, tasks, or logs... (Changes auto-save!)"></textarea>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
