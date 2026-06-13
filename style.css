@@ -1,17 +1,17 @@
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 :root {
-  
   --card-bg: rgba(255, 255, 255, 0.45);
   --text-main: #1e293b;
-  --text-muted: #64748b;
+  --text-muted: #52607a;
   --accent: #d946ef;
   --accent-hover: #f472b6;
 }
+
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -22,11 +22,11 @@ body {
   align-items: center;
   padding: 2rem;
   
-  
+
   background-color: #A9C9FF;
   background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
   background-size: 100% 100%;
-  background-attachment: fixed; 
+  background-attachment: fixed;
 }
 
 .dashboard {
@@ -59,6 +59,20 @@ header h2 {
   gap: 1.5rem;
 }
 
+
+@keyframes softGlow {
+  0% { box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); }
+  50% { box-shadow: 0 8px 32px 0 rgba(217, 70, 239, 0.2); }
+  100% { box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
 .card {
   background-color: var(--card-bg);
   border-radius: 16px;
@@ -70,14 +84,51 @@ header h2 {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
   
+
+  animation: softGlow 6s ease-in-out infinite;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+
+.card:nth-child(1) { animation-delay: 0s; }
+.card:nth-child(2) { animation-delay: 2s; }
+.card:nth-child(3) { animation-delay: 4s; }
+.card:nth-child(4) { animation-delay: 1s; }
+.card:nth-child(5) { animation-delay: 3s; }
+.card:nth-child(6) { animation-delay: 5s; }
 
 .card:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: rgba(255, 255, 255, 1);
   box-shadow: 0 15px 35px 0 rgba(31, 38, 135, 0.15);
+  animation-play-state: paused;
   z-index: 10;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+.card:hover h3 {
+  color: var(--text-main);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.weather-status {
+  font-size: 1rem;
+  color: var(--text-muted);
 }
