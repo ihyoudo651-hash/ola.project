@@ -1,15 +1,15 @@
-/* --- Modern Reset & CSS Variables --- */
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 :root {
-  /* Updated to a sleek light-glass theme to match your background */
-  --card-bg: rgba(255, 255, 255, 0.45); /* Semi-transparent white */
-  --text-main: #1e293b; /* Dark slate for readability */
+  
+  --card-bg: rgba(255, 255, 255, 0.45);
+  --text-main: #1e293b;
   --text-muted: #64748b;
-  --accent: #d946ef; /* A vibrant pink to match the gradient */
+  --accent: #d946ef;
   --accent-hover: #f472b6;
 }
 
@@ -22,11 +22,11 @@ body {
   align-items: center;
   padding: 2rem;
   
-  /* --- THE BACKGROUND YOU REQUESTED --- */
+  
   background-color: #A9C9FF;
   background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
   background-size: 100% 100%;
-  background-attachment: fixed; /* Keeps the gradient smooth when scrolling */
+  background-attachment: fixed; 
 }
 
 .dashboard {
@@ -34,7 +34,7 @@ body {
   max-width: 1000px;
 }
 
-/* --- Header Styles --- */
+
 header {
   margin-bottom: 2.5rem;
   text-align: left;
@@ -52,14 +52,13 @@ header h2 {
   color: var(--text-main);
 }
 
-/* --- Grid Layout --- */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
-/* --- Card Component (Frosted Glass Effect) --- */
 .card {
   background-color: var(--card-bg);
   border-radius: 16px;
@@ -67,7 +66,7 @@ header h2 {
   display: flex;
   flex-direction: column;
   
-  /* The Glassmorphism Magic */
+
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.6);
