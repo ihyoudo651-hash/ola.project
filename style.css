@@ -191,8 +191,20 @@ header h2 {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 350px;
+  width: 175px;
   height: 5px;
+  background: #673C63;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 2px 5px #111;
+  z-index: 2;
+}
+
+.floor2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 8px;
   background: #673C63;
   transform: translate(-50%, -50%);
   box-shadow: 0px 2px 5px #111;
