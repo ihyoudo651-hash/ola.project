@@ -15,9 +15,6 @@
   --accent-hover: #f472b6;
 }
 
-/* =========================================
-   BODY & BACKGROUND
-   ========================================= */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--text-main);
@@ -27,11 +24,11 @@ body {
   align-items: center;
   padding: 2rem;
   
+  /* Original Colors Preserved */
   background-color: #A9C9FF;
   background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
   background-size: 100% 100%;
   background-attachment: fixed;
-  animation: change-background 3s infinite linear;
 }
 
 .dashboard {
@@ -39,9 +36,6 @@ body {
   max-width: 1000px;
 }
 
-/* =========================================
-   HEADER
-   ========================================= */
 header {
   margin-bottom: 2.5rem;
   text-align: left;
@@ -59,9 +53,6 @@ header h2 {
   color: var(--text-main);
 }
 
-/* =========================================
-   GRID LAYOUT
-   ========================================= */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -69,7 +60,7 @@ header h2 {
 }
 
 /* =========================================
-   ANIMATIONS & KEYFRAMES
+   CARD STYLES
    ========================================= */
 @keyframes softGlow {
   0% { box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); }
@@ -77,36 +68,18 @@ header h2 {
   100% { box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); }
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* =========================================
-   CARD COMPONENT (GLASS + ANIMATIONS)
-   ========================================= */
 .card {
   background-color: var(--card-bg);
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  
   animation: softGlow 6s ease-in-out infinite;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
-.card:nth-child(1) { animation-delay: 0s; }
-.card:nth-child(2) { animation-delay: 2s; }
-.card:nth-child(3) { animation-delay: 4s; }
-.card:nth-child(4) { animation-delay: 1s; }
-.card:nth-child(5) { animation-delay: 3s; }
-.card:nth-child(6) { animation-delay: 5s; }
 
 .card:hover {
   transform: translateY(-8px) scale(1.02);
@@ -122,197 +95,19 @@ header h2 {
   color: var(--text-muted);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 0.5rem;
-  transition: color 0.3s ease;
-}
-.card:hover h3 {
-  color: var(--text-main);
 }
 
-.text-muted {
-  color: var(--text-muted);
-}
+.text-muted { color: var(--text-muted); }
 
 /* =========================================
-   WEATHER WIDGET
-   ========================================= */
-.weather-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.weather-status {
-  font-size: 1rem;
-  color: var(--text-muted);
-}
-.weather-temp {
-  font-size: 2.5rem;
-  font-weight: bold;
-  background: linear-gradient(270deg, var(--accent), #8b5cf6, var(--accent));
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 5s ease infinite;
-}
-
-/* =========================================
-   READING LIST
-   ========================================= */
-.reading-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.reading-list li {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  transition: transform 0.2s ease, color 0.2s ease;
-  cursor: default;
-}
-.reading-list li:hover {
-  transform: translateX(8px);
-  color: var(--accent);
-}
-
-/* =========================================
-   DAILY LINKS
-   ========================================= */
-.links-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.link-btn {
-  display: block;
-  background-color: rgba(255, 255, 255, 0.5);
-  color: var(--text-main);
-  text-decoration: none;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-.link-btn::before {
-  content: '';
-  position: absolute;
-  top: 0; 
-  left: -100%;
-  width: 100%; 
-  height: 100%;
-  background-color: var(--accent);
-  transition: left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  z-index: -1;
-}
-.link-btn:hover::before {
-  left: 0;
-}
-.link-btn:hover {
-  color: #ffffff;
-  transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(217, 70, 239, 0.3);
-  border-color: transparent;
-}
-
-/* =========================================
-   SPOTIFY FIX
-   ========================================= */
-.spotify-card iframe {
-  border: none;
-  border-radius: 12px;
-  margin-top: auto;
-  transition: opacity 0.3s ease;
-}
-.spotify-card:hover iframe {
-  opacity: 0.9;
-}
-
-/* =========================================
-   PHOTOS WIDGET
-   ========================================= */
-.photos-card {
-  text-decoration: none;
-  color: inherit;
-  min-height: 250px;
-}
-.photos-gallery {
-  width: 100%;
-  height: 100%;
-  min-height: 165px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-top: auto;
-}
-.photos-gallery img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.photos-card:hover .photos-gallery img {
-  transform: scale(1.1) rotate(1deg);
-}
-.photos-click-hint {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-top: 0.6rem;
-  text-align: right;
-  font-weight: 500;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-.photos-card:hover .photos-click-hint {
-  color: var(--accent);
-  transform: translateX(-4px);
-}
-
-/* =========================================
-   LIVE DIARY
-   ========================================= */
-.diary-card {
-  grid-column: span 1;
-}
-@media (min-width: 768px) {
-  .diary-card {
-    grid-column: span 2; 
-  }
-}
-#live-diary {
-  width: 100%;
-  min-height: 152px;
-  background-color: rgba(255, 255, 255, 0.3);
-  color: var(--text-main);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
-  padding: 0.75rem;
-  font-family: inherit;
-  font-size: 0.95rem;
-  resize: vertical;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-#live-diary::placeholder {
-  color: var(--text-muted);
-  opacity: 0.8;
-}
-#live-diary:focus {
-  background-color: rgba(255, 255, 255, 0.6);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(217, 70, 239, 0.2);
-}
-
-/* =========================================
-   ANIMATED CANDLE BACKGROUND 
+   ANIMATED CANDLE BACKGROUND
    ========================================= */
 .wrapper {
   position: fixed;
   left: 50%;
   top: 50%;
-  transform: scale(1.5, 1.5) translate(-50%, -50%);
+  /* Fixed sizing here */
+  transform: scale(0.4) translate(-125%, -125%); 
   z-index: -1;
   pointer-events: none;
   opacity: 0.8;
@@ -514,6 +309,7 @@ header h2 {
   animation: dance-fire 3s infinite linear;
 }
 
+/* Animations */
 @keyframes blink-eyes {
   0%,35% { opacity: 1; transform: translate(-70%, 0%); }
   36%,39% { opacity: 0; transform: translate(-70%, 0%); }
@@ -539,17 +335,6 @@ header h2 {
   67% { width: 0px; height: 0px; left: 30%; }
 }
 
-@keyframes change-background {
-  0%,59%,98%,100% {
-    background-color: #A9C9FF;
-    background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
-  }
-  61%,97% {
-    background-color: #0f172a;
-    background-image: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-  }
-}
-
 @keyframes move-left {
   0%,59%,100% { width: 0px; left: 40%; }
   60% { width: 30px; left: 30%; }
@@ -572,13 +357,13 @@ header h2 {
   75% { 
     left: 20%; 
     transform: scale(1.15, 0.85) translate(60%, -15%);
-    background: #B4D4E9; 
+    background: #B4D4E9;
     border-color: #673C63; 
   }
   91% { 
     left: 20%; 
     transform: scale(1.18, 0.82) translate(60%, -10%);
-    background: #F44336; 
+    background: #F44336;
     border-color: #F44336;
     box-shadow: -2px 0px 0px #F44336 inset;
   }
@@ -622,39 +407,3 @@ header h2 {
   0%,70%,90% { top: 50%; padding: 0px; display: inline-block; border-radius: 100%; background: #673C63; border-width: 0 0 0 0; border: 0px solid #673C63; transform: translate(-80%, 0%); }
   71%,89% { top: 30%; background: none; border: solid #673C63; border-radius: 0px; border-width: 0 2px 2px 0; display: inline-block; padding: 1px; float: left; transform-origin: bottom left; transform: rotate(135deg) translate(-80%, 20%); -webkit-transform: rotate(135deg) translate(-80%, 20%); }
 }
-
-/* --- CANDLE BACKGROUND FIX --- */
-.wrapper {
-  position: fixed; /* Fixes it to the background */
-  top: 60%;        /* Move it down slightly */
-  left: 50%;
-  transform: scale(0.7, 0.7) translate(-50%, -50%); /* Scaled down */
-  z-index: -1;     /* Ensures it stays behind everything */
-  pointer-events: none; /* Allows clicks to pass through to your dashboard */
-}
-
-.floor {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 350px;
-  height: 5px;
-  background: #673C63;
-  transform: translate(-50%, -50%);
-  box-shadow: 0px 2px 5px #111;
-  z-index: 2;
-}
-
-.candles {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 250px;
-  height: 150px;
-  transform: translate(-50%, -100%);
-  z-index: 1;
-}
-
-/* Add the rest of your candle classes here (candle1, candle2, animations, etc.) */
-/* NOTE: Keep these exact same class names as the previous code you had, */
-/* just do not include the body { animation: ... } part! */
