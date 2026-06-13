@@ -165,16 +165,26 @@ header h2 {
 }
 
 /* =========================================
-   ANIMATED CANDLE BACKGROUND
+   ANIMATED CANDLE WIDGET
    ========================================= */
+.candle-card {
+  min-height: 250px;
+  position: relative;
+  overflow: hidden; /* Keeps the floor and light aura contained inside the glass */
+  display: flex;
+  flex-direction: column;
+}
+
 .wrapper {
-  position: fixed;
-  bottom: 5%;
-  right: 15%;
-  transform: scale(0.6); 
+  position: absolute;
+  top: 65%; /* Pushes the candles down nicely into the card */
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: scale(0.5); /* Shrinks the animation to fit the card perfectly */
   z-index: 1;
   pointer-events: none;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .floor {
