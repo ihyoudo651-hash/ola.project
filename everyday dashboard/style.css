@@ -1,0 +1,200 @@
+/* Modern Reset & CSS Variables */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Header Styles */
+header {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+header h1 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card Component */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid #334155;
+  padding-bottom: 0.5rem;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* Weather Widget Styles */
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.weather-status {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+.weather-temp {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+/* Reading List Styles */
+.reading-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.reading-list li {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Daily Links Styles */
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.link-btn {
+  display: block;
+  background-color: #334155;
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.link-btn:hover {
+  background-color: var(--accent);
+  color: var(--bg-color);
+}
+
+/* Spotify Layout Fix */
+.spotify-card iframe {
+  border: none;
+  border-radius: 12px;
+  margin-top: auto;
+}
+
+/* Photos Widget Links & Modifiers */
+.photos-card {
+  text-decoration: none;
+  color: inherit;
+  min-height: 250px;
+}
+.photos-gallery {
+  width: 100%;
+  height: 100%;
+  min-height: 165px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: auto;
+}
+.photos-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.photos-card:hover .photos-gallery img {
+  transform: scale(1.06);
+}
+.photos-click-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+  text-align: right;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.photos-card:hover .photos-click-hint {
+  color: var(--accent);
+}
+
+/* Live Diary Layout & Styling */
+.diary-card {
+  grid-column: span 1;
+}
+@media (min-width: 768px) {
+  .diary-card {
+    grid-column: span 2; 
+  }
+}
+#live-diary {
+  width: 100%;
+  min-height: 152px;
+  background-color: #0f172a;
+  color: var(--text-main);
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  outline: none;
+}
+#live-diary:focus {
+  border-color: var(--accent);
+}
