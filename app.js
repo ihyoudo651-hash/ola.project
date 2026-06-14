@@ -99,55 +99,61 @@ async function fetchQuotesFromDatabase() {
     quoteList.appendChild(item);
   });
 }
-const canvas = document.getElementById('whiteboard');
-const ctx = canvas.getContext('2d');
-let drawing = false;
-let lastX = 0;
-let lastY = 0;
 
-ctx.strokeStyle = '#fff';
-ctx.lineWidth = 2;
-ctx.lineJoin = 'round';
-
-canvas.addEventListener('mousedown', (e) => {
-  drawing = true;
-  [lastX, lastY] = [e.offsetX, e.offsetY];
-});
-
-canvas.addEventListener('mousemove', async (e) => {
-  if (!drawing) return;
+// Ensure the DOM is fully loaded before running whiteboard logic
+document.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('whiteboard');
+  if (!canvas) return; // Exit if canvas isn't found
   
-  const currentX = e.offsetX;
-  const currentY = e.offsetY;
+  const ctx = canvas.getContext('2d');
+  let drawing = false;
+  let lastX = 0;
+  let lastY = 0;
 
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
 
-  drawLine(lastX, lastY, currentX, currentY);
+  function drawLine(x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+  }
 
+  canvas.addEventListener('mousedown', (e) => {
+    drawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+  });
 
-  await supabaseClient.from('whiteboard').insert([{
-    x1: lastX, y1: lastY, x2: currentX, y2: currentY
-  }]);
+  canvas.addEventListener('mousemove', async (e) => {
+    if (!drawing) return;
+    const currentX = e.offsetX;
+    const currentY = e.offsetY;
 
-  [lastX, lastY] = [currentX, currentY];
+    drawLine(lastX, lastY, currentX, currentY);
+
+    await supabaseClient.from('whiteboard').insert([{
+      x1: lastX, y1: lastY, x2: currentX, y2: currentY
+    }]);
+
+    [lastX, lastY] = [currentX, currentY];
+  });
+
+  canvas.addEventListener('mouseup', () => drawing = false);
+  canvas.addEventListener('mouseleave', () => drawing = false);
+
+  // Real-time listener
+  supabaseClient
+    .channel('whiteboard')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'whiteboard' }, payload => {
+      const { x1, y1, x2, y2 } = payload.new;
+      drawLine(x1, y1, x2, y2);
+    })
+    .subscribe((status) => {
+      console.log("Whiteboard subscription status:", status);
+    });
 });
-
-canvas.addEventListener('mouseup', () => drawing = false);
-
-function drawLine(x1, y1, x2, y2) {
-  ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-  ctx.stroke();
-}
-
-
-supabaseClient
-  .channel('whiteboard')
-  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'whiteboard' }, payload => {
-    const { x1, y1, x2, y2 } = payload.new;
-    drawLine(x1, y1, x2, y2);
-  })
-  .subscribe();
 
 updateGreeting();
 fetchWeather();
