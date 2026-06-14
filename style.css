@@ -1,6 +1,4 @@
-/* =========================================
-   CORE CONFIGURATION & SITE LAYOUT
-   ========================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -27,7 +25,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Background state changes to match the angry candle loop */
+
 @keyframes bg-sync {
   0%, 65% { background-color: #050515; }
   75%, 95% { background-color: #000000; }
@@ -59,16 +57,14 @@ header h2 {
   -webkit-text-fill-color: transparent;
 }
 
-/* Responsive Grid Base */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 4rem 2.5rem;
 }
 
-/* =========================================
-   GLOWING GRADIENT GLASSMORPHISM ARCHITECTURE
-   ========================================= */
+
 .card {
   position: relative;
   min-height: 380px;
@@ -80,7 +76,7 @@ header h2 {
   background: transparent;
 }
 
-/* The Frosted Glass Faceplate Container */
+
 .card .content {
   position: relative;
   left: 0;
@@ -100,7 +96,7 @@ header h2 {
   flex-direction: column;
 }
 
-/* Interactive Card Motion on Hover */
+
 .card:hover .content {
   left: -20px;
   padding: 40px 30px;
@@ -119,7 +115,7 @@ header h2 {
   letter-spacing: 0.02em;
 }
 
-/* --- Core Gradient Underplates (Hidden Radiance) --- */
+
 .card::before {
   content: ' ';
   position: absolute;
@@ -133,7 +129,7 @@ header h2 {
   z-index: 1;
 }
 
-/* --- Blurred Aura Background (The Glow Output) --- */
+
 .card::after {
   content: '';
   position: absolute;
@@ -149,7 +145,7 @@ header h2 {
   z-index: 1;
 }
 
-/* Expansion and Unskew Loop on Hover */
+
 .card:hover::before,
 .card:hover::after {
   transform: skewX(0deg);
@@ -161,7 +157,7 @@ header h2 {
   filter: blur(35px);
 }
 
-/* --- Tailored Identity Neon Gradients for All 7 Cards --- */
+
 .weather-card::before, .weather-card::after { background: linear-gradient(315deg, #ffbc00, #ff0058); }
 .reading-card::before, .reading-card::after { background: linear-gradient(315deg, #03a9f4, #ff0058); }
 .links-card::before, .links-card::after { background: linear-gradient(315deg, #4dff03, #00d0ff); }
@@ -170,9 +166,7 @@ header h2 {
 .quote-card::before, .quote-card::after { background: linear-gradient(315deg, #ff9f1c, #ff4000); }
 .candle-card::before, .candle-card::after { background: linear-gradient(315deg, #3a0ca3, #4cc9f0); }
 
-/* =========================================
-   FLOATING OVERLAY GLASS GEOMETRIES
-   ========================================= */
+
 .card span {
   display: block;
   position: absolute;
@@ -184,7 +178,7 @@ header h2 {
   pointer-events: none;
 }
 
-/* Upper Floating Square */
+
 .card span::before {
   content: '';
   position: absolute;
@@ -211,7 +205,7 @@ header h2 {
   opacity: 1;
 }
 
-/* Lower Floating Square */
+
 .card span::after {
   content: '';
   position: absolute;
@@ -244,12 +238,10 @@ header h2 {
   50% { transform: translateY(-6px) rotate(4deg); }
 }
 
-/* =========================================
-   INTERNAL WIDGET CUSTOMISATIONS
-   ========================================= */
+
 .text-muted { color: var(--text-muted); }
 
-/* Weather Card Element */
+
 .weather-info {
   margin: auto 0;
   text-align: center;
@@ -268,7 +260,7 @@ header h2 {
   -webkit-text-fill-color: transparent;
 }
 
-/* Reading List Content */
+
 .reading-list { list-style: none; }
 .reading-list li {
   padding: 0.65rem 0;
@@ -276,7 +268,7 @@ header h2 {
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* Daily Links UI Control */
+
 .links-list { margin: auto 0; }
 .link-btn {
   display: block;
@@ -300,7 +292,7 @@ header h2 {
   transform: translateY(-2px);
 }
 
-/* Photos Window Panel */
+
 .photos-card { cursor: pointer; }
 .photos-gallery {
   width: 100%;
@@ -331,9 +323,7 @@ header h2 {
   color: #fff;
 }
 
-/* =========================================
-   QUOTE WALL WIDGET STYLES
-   ========================================= */
+
 .quote-wall-container {
   display: flex;
   flex-direction: column;
@@ -349,7 +339,7 @@ header h2 {
   padding-right: 5px;
 }
 
-/* Custom Scrollbar for the Quote List */
+
 .quote-list::-webkit-scrollbar {
   width: 4px;
 }
@@ -463,15 +453,13 @@ header h2 {
   color: #050515;
 }
 
-/* Spotify Box Constraint */
+
 .spotify-card iframe {
   margin-top: auto;
   border: none;
 }
 
-/* =========================================
-   ANIMATED CANDLE METRICS CONTROLLER
-   ========================================= */
+
 .candle-card .content {
   overflow: hidden;
 }
@@ -652,7 +640,7 @@ header h2 {
   animation: dance-fire 3s infinite linear;
 }
 
-/* Keyframe Loop Trackers */
+
 @keyframes blink-eyes {
   0%,35% { opacity: 1; transform: translate(-70%, 0%); }
   36%,39% { opacity: 0; transform: translate(-70%, 0%); }
