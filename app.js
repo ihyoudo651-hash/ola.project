@@ -33,7 +33,6 @@ async function fetchWeather() {
 const SUPABASE_URL = "https://itfmvbsrvroructmeirx.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0Zm12YnNydnJvcnVjdG1laXJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjUxMzUsImV4cCI6MjA5NzAwMTEzNX0.Bzj_khBMZXpkOLOrOsWpDK112_lKSeArVqNS_YFonm8"; 
 
-// Renamed to supabaseClient to prevent the browser syntax crash
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const quoteForm = document.getElementById('quote-form');
@@ -51,10 +50,10 @@ async function initQuoteWall() {
     const quoteText = textInput.value.trim();
     const quoteAuthor = authorInput.value.trim();
 
-    // Changed 'text' to 'name' to match your exact Supabase column setup
+    // Fixed: Changed 'name' back to 'text' to match your actual SQL table structure
     const { error } = await supabaseClient
       .from('quotes')
-      .insert([{ name: quoteText, author: quoteAuthor }]);
+      .insert([{ text: quoteText, author: quoteAuthor }]);
 
     if (error) {
       console.error("Error saving quote:", error);
@@ -92,9 +91,9 @@ async function fetchQuotesFromDatabase() {
     
     const dateStr = quote.created_at ? new Date(quote.created_at).toLocaleDateString() : '';
 
-    // Changed quote.text to quote.name to match your exact database records
+    // Fixed: Changed quote.name back to quote.text
     item.innerHTML = `
-      <p class="quote-text">“${quote.name}”</p>
+      <p class="quote-text">“${quote.text}”</p>
       <div class="quote-meta">— ${quote.author} <span class="quote-date">${dateStr}</span></div>
     `;
     quoteList.appendChild(item);
