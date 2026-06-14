@@ -102,23 +102,50 @@ async function fetchQuotesFromDatabase() {
 const canvas = document.getElementById('whiteboard');
 const ctx = canvas.getContext('2d');
 let drawing = false;
+let lastX = 0;
+let lastY = 0;
 
+ctx.strokeStyle = '#fff';
+ctx.lineWidth = 2;
+ctx.lineJoin = 'round';
+
+canvas.addEventListener('mousedown', (e) => {
+  drawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
 
 canvas.addEventListener('mousemove', async (e) => {
   if (!drawing) return;
-  const { x, y } = { x: e.offsetX, y: e.offsetY };
   
+  const currentX = e.offsetX;
+  const currentY = e.offsetY;
 
-  await supabaseClient.from('whiteboard').insert([{ x1: x, y1: y, x2: x, y2: y }]);
+
+  drawLine(lastX, lastY, currentX, currentY);
+
+
+  await supabaseClient.from('whiteboard').insert([{
+    x1: lastX, y1: lastY, x2: currentX, y2: currentY
+  }]);
+
+  [lastX, lastY] = [currentX, currentY];
 });
+
+canvas.addEventListener('mouseup', () => drawing = false);
+
+function drawLine(x1, y1, x2, y2) {
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+}
 
 
 supabaseClient
   .channel('whiteboard')
   .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'whiteboard' }, payload => {
-    const { x1, y1 } = payload.new;
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(x1, y1, 2, 2);
+    const { x1, y1, x2, y2 } = payload.new;
+    drawLine(x1, y1, x2, y2);
   })
   .subscribe();
 
