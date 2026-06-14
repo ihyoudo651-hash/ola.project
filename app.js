@@ -50,7 +50,7 @@ async function initQuoteWall() {
     const quoteText = textInput.value.trim();
     const quoteAuthor = authorInput.value.trim();
 
-    // Fixed: Changed 'name' back to 'text' to match your actual SQL table structure
+ 
     const { error } = await supabaseClient
       .from('quotes')
       .insert([{ text: quoteText, author: quoteAuthor }]);
