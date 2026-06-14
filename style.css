@@ -459,6 +459,12 @@ header h2 {
   border: none;
 }
 
+.whiteboard-card {
+  grid-column: span 3;
+  grid-row: span 2;
+  min-height: 600px;
+}
+
 
 .candle-card .content {
   overflow: hidden;
