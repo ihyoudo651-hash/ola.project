@@ -32,10 +32,10 @@
         <div class="content">
           <h3>Reading List</h3>
           <ul class="reading-list">
-            <li>📚 One piece - Chapter 1184</li>
-            <li>📚 Wistoria - Chapter 65</li>
-            <li>📚 Eleceed - Chapter 405</li>
-            <li>📚 Blue lock - Chapter 394</li>
+            <li>📚 One piece - <span class="text-muted">Chapter 1184</span></li>
+            <li>📚 Wistoria - <span class="text-muted">Chapter 65</span></li>
+            <li>📚 Eleceed - <span class="text-muted">Chapter 405</span></li>
+            <li>📚 Blue lock - <span class="text-muted">Chapter 394</span></li>
           </ul>
         </div>
       </section>
@@ -65,17 +65,27 @@
         <div class="content">
           <h3>Photos</h3>
           <div class="photos-gallery">
-            <img src="mike-bruss-eating.jpg" alt="Gallery Preview" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop'">
+            <img src="mike bruss eating.jpg" alt="Gallery Preview" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop'">
           </div>
           <span class="photos-click-hint">View Collection ↗</span>
         </div>
       </a>
 
-      <section class="card diary-card">
+<section class="card quote-card">
         <span></span>
         <div class="content">
-          <h3>Live Diary</h3>
-          <textarea id="live-diary" placeholder="Type thoughts, tasks, or logs... (Changes auto-save!)"></textarea>
+          <h3>The Quote Wall</h3>
+          <div class="quote-wall-container">
+            <div id="quote-list" class="quote-list">
+              </div>
+            <form id="quote-form" class="quote-form">
+              <textarea id="quote-input" placeholder="Type a ridiculous out-of-context quote..." required></textarea>
+              <div class="quote-form-row">
+                <input type="text" id="quote-author" placeholder="Who said it?" required>
+                <button type="submit" class="quote-btn">Submit</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
 
