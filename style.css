@@ -167,7 +167,7 @@ header h2 {
 .links-card::before, .links-card::after { background: linear-gradient(315deg, #4dff03, #00d0ff); }
 .spotify-card::before, .spotify-card::after { background: linear-gradient(315deg, #f72585, #7209b7); }
 .photos-card::before, .photos-card::after { background: linear-gradient(315deg, #00f5d4, #7b2cbf); }
-.diary-card::before, .diary-card::after { background: linear-gradient(315deg, #ff9f1c, #ff4000); }
+.quote-card::before, .quote-card::after { background: linear-gradient(315deg, #ff9f1c, #ff4000); }
 .candle-card::before, .candle-card::after { background: linear-gradient(315deg, #3a0ca3, #4cc9f0); }
 
 /* =========================================
@@ -331,24 +331,136 @@ header h2 {
   color: #fff;
 }
 
-/* Local Storage live Diary Input */
-#live-diary {
+/* =========================================
+   QUOTE WALL WIDGET STYLES
+   ========================================= */
+.quote-wall-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.quote-list {
+  flex-grow: 1;
+  height: 160px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding-right: 5px;
+}
+
+/* Custom Scrollbar for the Quote List */
+.quote-list::-webkit-scrollbar {
+  width: 4px;
+}
+.quote-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.quote-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.quote-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.quote-item {
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid #ff9f1c;
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 0.75rem;
+}
+
+.quote-text {
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: #fff;
+  word-break: break-word;
+}
+
+.quote-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.quote-date {
+  font-weight: 400;
+  opacity: 0.6;
+  margin-left: 4px;
+}
+
+.quote-empty {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+  margin-top: 2rem;
+}
+
+.quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#quote-input {
   width: 100%;
+  height: 55px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 12px;
+  resize: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  transition: border-color 0.3s;
+}
+
+.quote-form-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#quote-author {
   flex-grow: 1;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.06);
   color: #fff;
-  border-radius: 8px;
-  padding: 15px;
-  resize: none;
+  border-radius: 6px;
+  padding: 0 12px;
   font-family: inherit;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
   transition: border-color 0.3s;
 }
-#live-diary:focus {
+
+#quote-input:focus, #quote-author:focus {
   outline: none;
   border-color: rgba(255, 255, 255, 0.25);
+}
+
+.quote-btn {
+  padding: 0 16px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quote-btn:hover {
+  background: #fff;
+  color: #050515;
 }
 
 /* Spotify Box Constraint */
@@ -625,5 +737,4 @@ header h2 {
 @keyframes changeto-greater {
   0%,70%,90% { top: 50%; border-radius: 100%; background: #673C63; transform: translate(-80%, 0%); border: 0px; padding: 0; }
   71%,89% { top: 30%; background: none; border: solid #673C63; border-width: 0 2px 2px 0; display: inline-block; padding: 1px; transform: rotate(135deg) translate(-80%, 20%); }
-}+
-
+}
