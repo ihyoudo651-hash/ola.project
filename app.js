@@ -109,6 +109,3 @@ async function fetchQuotesFromDatabase() {
 updateGreeting();
 fetchWeather();
 initQuoteWall();
-updateGreeting();
-fetchWeather();
-initQuoteWall();
