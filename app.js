@@ -31,62 +31,84 @@ async function fetchWeather() {
 }
 
 
-// --- THE QUOTE WALL ENGINE ---
+// supbase database
+const SUPABASE_URL = "https://itfmvbsrvroructmeirx.supabase.co/rest/v1/"; 
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0Zm12YnNydnJvcnVjdG1laXJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjUxMzUsImV4cCI6MjA5NzAwMTEzNX0.Bzj_khBMZXpkOLOrOsWpDK112_lKSeArVqNS_YFonm8";
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 const quoteForm = document.getElementById('quote-form');
 const quoteList = document.getElementById('quote-list');
 
-function initQuoteWall() {
-  // Load existing quotes or default to an empty array
-  let quotes = JSON.parse(localStorage.getItem('dashboard_quotes')) || [];
+async function initQuoteWall() {
   
-  // Render them on startup
-  renderQuotes(quotes);
+  await fetchQuotesFromDatabase();
 
-  // Handle form submission
-  quoteForm.addEventListener('submit', (e) => {
+  
+  quoteForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const textInput = document.getElementById('quote-input');
     const authorInput = document.getElementById('quote-author');
 
-    const newQuote = {
-      text: textInput.value.trim(),
-      author: authorInput.value.trim(),
-      timestamp: new Date().toLocaleDateString()
-    };
+    const quoteText = textInput.value.trim();
+    const quoteAuthor = authorInput.value.trim();
 
-    quotes.push(newQuote);
-    localStorage.setItem('dashboard_quotes', JSON.stringify(quotes));
     
-    renderQuotes(quotes);
+    const { error } = await supabase
+      .from('quotes')
+      .insert([{ text: quoteText, author: quoteAuthor }]);
 
-    // Reset fields
-    textInput.value = '';
-    authorInput.value = '';
+    if (error) {
+      console.error("Error saving quote:", error);
+      alert("Failed to save quote to the wall.");
+    } else {
+      
+      textInput.value = '';
+      authorInput.value = '';
+      await fetchQuotesFromDatabase();
+    }
   });
 }
 
-function renderQuotes(quotes) {
+async function fetchQuotesFromDatabase() {
+  
+  const { data: quotes, error } = await supabase
+    .from('quotes')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error("Error fetching quotes:", error);
+    quoteList.innerHTML = '<div class="quote-empty">Error connecting to the Quote Wall database.</div>';
+    return;
+  }
+
   quoteList.innerHTML = '';
   
-  if (quotes.length === 0) {
+  if (!quotes || quotes.length === 0) {
     quoteList.innerHTML = '<div class="quote-empty">No quotes yet. Say something unhinged.</div>';
     return;
   }
 
-  // Render quotes in reverse order so the newest appears at the top
-  quotes.slice().reverse().forEach(quote => {
+  quotes.forEach(quote => {
     const item = document.createElement('div');
     item.className = 'quote-item';
+    
+    
+    const dateStr = quote.created_at ? new Date(quote.created_at).toLocaleDateString() : '';
+
     item.innerHTML = `
       <p class="quote-text">“${quote.text}”</p>
-      <div class="quote-meta">— ${quote.author} <span class="quote-date">${quote.timestamp}</span></div>
+      <div class="quote-meta">— ${quote.author} <span class="quote-date">${dateStr}</span></div>
     `;
     quoteList.appendChild(item);
   });
 }
 
 
+updateGreeting();
+fetchWeather();
+initQuoteWall();
 updateGreeting();
 fetchWeather();
 initQuoteWall();
