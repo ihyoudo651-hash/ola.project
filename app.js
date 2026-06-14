@@ -99,7 +99,28 @@ async function fetchQuotesFromDatabase() {
     quoteList.appendChild(item);
   });
 }
+const canvas = document.getElementById('whiteboard');
+const ctx = canvas.getContext('2d');
+let drawing = false;
 
+
+canvas.addEventListener('mousemove', async (e) => {
+  if (!drawing) return;
+  const { x, y } = { x: e.offsetX, y: e.offsetY };
+  
+
+  await supabaseClient.from('whiteboard').insert([{ x1: x, y1: y, x2: x, y2: y }]);
+});
+
+
+supabaseClient
+  .channel('whiteboard')
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'whiteboard' }, payload => {
+    const { x1, y1 } = payload.new;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(x1, y1, 2, 2);
+  })
+  .subscribe();
 
 updateGreeting();
 fetchWeather();
