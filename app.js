@@ -91,7 +91,7 @@ async function fetchQuotesFromDatabase() {
     
     const dateStr = quote.created_at ? new Date(quote.created_at).toLocaleDateString() : '';
 
-    // Fixed: Changed quote.name back to quote.text
+   
     item.innerHTML = `
       <p class="quote-text">“${quote.text}”</p>
       <div class="quote-meta">— ${quote.author} <span class="quote-date">${dateStr}</span></div>
@@ -100,7 +100,7 @@ async function fetchQuotesFromDatabase() {
   });
 }
 
-// Initializing code cleanly once
+
 updateGreeting();
 fetchWeather();
 initQuoteWall();
