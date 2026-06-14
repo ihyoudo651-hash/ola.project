@@ -22,6 +22,7 @@ async function loadWhiteboard() {
   fetchWeather();
   initQuoteWall();
   initWhiteboard();
+  loadWhiteboard();
 });
 
 // --- GREETING & WEATHER ---
