@@ -3,7 +3,7 @@ const SUPABASE_URL = "https://itfmvbsrvroructmeirx.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0Zm12YnNydnJvcnVjdG1laXJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjUxMzUsImV4cCI6MjA5NzAwMTEzNX0.Bzj_khBMZXpkOLOrOsWpDK112_lKSeArVqNS_YFonm8";
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// --- WHITEBOARD GLOBALS ---
+// --- GLOBAL WHITEBOARD VARIABLES ---
 let canvas;
 let ctx;
 
@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   updateGreeting();
   fetchWeather();
   initQuoteWall();
-  initWhiteboard();
+  initWhiteboard(); // Setup canvas context first
+  loadWhiteboard(); // Load the drawings from the database next
 });
 
 // --- GREETING & WEATHER ---
@@ -64,7 +65,7 @@ async function fetchQuotesFromDatabase(quoteList) {
   });
 }
 
-// --- WHITEBOARD HELPERS ---
+// --- WHITEBOARD SHARED FUNCTIONS ---
 function drawLine(x1, y1, x2, y2) {
   if (!ctx) return;
   ctx.beginPath();
@@ -77,7 +78,7 @@ async function loadWhiteboard() {
   const { data: lines, error } = await supabaseClient
     .from('whiteboard')
     .select('*')
-    .order('created_at', { ascending: true }); // Draws lines in chronological order
+    .order('created_at', { ascending: true }); // Ascending order redraws lines in the exact order they were made
 
   if (error) {
     console.error("Error loading whiteboard:", error);
@@ -91,7 +92,7 @@ async function loadWhiteboard() {
   }
 }
 
-// --- WHITEBOARD INITIALIZATION ---
+// --- WHITEBOARD SETUP ---
 function initWhiteboard() {
   canvas = document.getElementById('whiteboard');
   if (!canvas) return;
@@ -104,10 +105,6 @@ function initWhiteboard() {
   ctx.lineWidth = 2;
   ctx.lineJoin = 'round';
 
-  // Load old drawings now that context variables are ready
-  loadWhiteboard();
-
-  // Event Listeners for Drawing
   canvas.addEventListener('mousedown', (e) => { 
     drawing = true; 
     [lastX, lastY] = [e.offsetX, e.offsetY]; 
@@ -123,7 +120,7 @@ function initWhiteboard() {
   canvas.addEventListener('mouseup', () => drawing = false);
   canvas.addEventListener('mouseleave', () => drawing = false);
 
-  // Real-time updates handler
+  // Real-time listener for multi-user sync
   supabaseClient.channel('whiteboard')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'whiteboard' }, payload => {
       const { x1, y1, x2, y2 } = payload.new;
