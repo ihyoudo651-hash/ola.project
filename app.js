@@ -33,7 +33,7 @@ async function fetchWeather() {
 
 // --- SUPABASE SETUP ---
 // Make sure these match the project details from your Supabase Dashboard settings!
-const SUPABASE_URL = "https://itfmvbsrvroructmeirx.supabase.co/rest/v1/"; 
+const SUPABASE_URL = "https://itfmvbsrvroructmeirx.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0Zm12YnNydnJvcnVjdG1laXJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjUxMzUsImV4cCI6MjA5NzAwMTEzNX0.Bzj_khBMZXpkOLOrOsWpDK112_lKSeArVqNS_YFonm8"; 
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
