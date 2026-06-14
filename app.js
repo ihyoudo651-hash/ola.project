@@ -1,5 +1,23 @@
 // --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
+  // --- LOAD EXISTING DRAWINGS ---
+async function loadWhiteboard() {
+  const { data: lines, error } = await supabaseClient
+    .from('whiteboard')
+    .select('*')
+    .order('created_at', { ascending: true }); // Ascending ensures lines draw in the exact order they were made
+
+  if (error) {
+    console.error("Error loading whiteboard:", error);
+    return;
+  }
+
+  if (lines) {
+    lines.forEach(line => {
+      drawLine(line.x1, line.y1, line.x2, line.y2);
+    });
+  }
+}
   updateGreeting();
   fetchWeather();
   initQuoteWall();
