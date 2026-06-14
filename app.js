@@ -31,19 +31,20 @@ async function fetchWeather() {
 }
 
 
-// supbase database
+// --- SUPABASE SETUP ---
+// Make sure these match the project details from your Supabase Dashboard settings!
 const SUPABASE_URL = "https://itfmvbsrvroructmeirx.supabase.co/rest/v1/"; 
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0Zm12YnNydnJvcnVjdG1laXJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjUxMzUsImV4cCI6MjA5NzAwMTEzNX0.Bzj_khBMZXpkOLOrOsWpDK112_lKSeArVqNS_YFonm8";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0Zm12YnNydnJvcnVjdG1laXJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MjUxMzUsImV4cCI6MjA5NzAwMTEzNX0.Bzj_khBMZXpkOLOrOsWpDK112_lKSeArVqNS_YFonm8"; 
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const quoteForm = document.getElementById('quote-form');
 const quoteList = document.getElementById('quote-list');
 
 async function initQuoteWall() {
-  
+  // 1. Load existing quotes from the database immediately
   await fetchQuotesFromDatabase();
 
-  
+  // 2. Listen for your friends submitting new quotes
   quoteForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -53,7 +54,7 @@ async function initQuoteWall() {
     const quoteText = textInput.value.trim();
     const quoteAuthor = authorInput.value.trim();
 
-    
+    // Send the quote straight to your live cloud table
     const { error } = await supabase
       .from('quotes')
       .insert([{ text: quoteText, author: quoteAuthor }]);
@@ -62,7 +63,7 @@ async function initQuoteWall() {
       console.error("Error saving quote:", error);
       alert("Failed to save quote to the wall.");
     } else {
-      
+      // Clear out the text inputs and refresh the board for everyone
       textInput.value = '';
       authorInput.value = '';
       await fetchQuotesFromDatabase();
@@ -71,7 +72,6 @@ async function initQuoteWall() {
 }
 
 async function fetchQuotesFromDatabase() {
-  
   const { data: quotes, error } = await supabase
     .from('quotes')
     .select('*')
@@ -94,7 +94,6 @@ async function fetchQuotesFromDatabase() {
     const item = document.createElement('div');
     item.className = 'quote-item';
     
-    
     const dateStr = quote.created_at ? new Date(quote.created_at).toLocaleDateString() : '';
 
     item.innerHTML = `
@@ -104,7 +103,6 @@ async function fetchQuotesFromDatabase() {
     quoteList.appendChild(item);
   });
 }
-
 
 updateGreeting();
 fetchWeather();
